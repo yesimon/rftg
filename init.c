@@ -1,6 +1,6 @@
 /*
  * Race for the Galaxy AI
- * 
+ *
  * Copyright (C) 2009-2011 Keldon Jones
  *
  * This program is free software; you can redistribute it and/or modify
@@ -412,7 +412,7 @@ void read_cards(void)
 
 				/* Done with flag line */
 				break;
-			
+
 			/* Good */
 			case 'G':
 

@@ -1,6 +1,6 @@
 /*
  * Race for the Galaxy AI
- * 
+ *
  * Copyright (C) 2009-2011 Keldon Jones
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,15 +25,15 @@
 #include "comm.h"
 
 /* Apple OS X specific-code */
-#ifdef __APPLE__     
+#ifdef __APPLE__
 #include "CoreFoundation/CoreFoundation.h"
-#include "ige-mac-menu.h"
+#include "gtk-mac-menu.h"
 #endif
 
 /*
  * Our default options.
  */
-options opt = 
+options opt =
 {
 	.num_players = 3,
 };
@@ -944,7 +944,7 @@ static gboolean action_check_takeover(void)
 
 			/* Check for too many targets */
 			if (target != -1) return 0;
-			
+
 			/* Remember target world */
 			target = i_ptr->index;
 		}
@@ -1304,7 +1304,7 @@ static GtkWidget *new_image_box(design *d_ptr, int w, int h, int color,
 
 		/* Copy blank space onto middle of border buffer */
 		gdk_pixbuf_copy_area(blank_buf, bw, bw, w - 2 * bw, h - 2 * bw,
-		                     border_buf, bw, bw); 
+		                     border_buf, bw, bw);
 
 		/* Composite border onto card image buffer */
 		gdk_pixbuf_composite(border_buf, buf, 0, 0, w, h, 0, 0, 1, 1,
@@ -1379,7 +1379,7 @@ static gboolean card_selected(GtkWidget *widget, GdkEventButton *event,
 				if (i_ptr == j_ptr) continue;
 
 				/* Clear selected */
-				j_ptr->selected = 0;		
+				j_ptr->selected = 0;
 			}
 		}
 		else
@@ -4453,7 +4453,7 @@ void gui_choose_defend(game *g, int who, int which, int opponent, int deficit,
 			{
 				/* Card is eligible */
 				i_ptr->eligible = 1;
-				
+
 				/* Highlight card in red when selected */
 				i_ptr->highlight = HIGH_RED;
 
@@ -6871,7 +6871,7 @@ static void gui_new_game(GtkMenuItem *menu_item, gpointer data)
 
 	/* Force game over */
 	real_game.game_over = 1;
-	
+
 	/* Start new game immediately */
 	restart_loop = RESTART_NEW;
 
@@ -7009,7 +7009,7 @@ static void gui_undo_game(GtkMenuItem *menu_item, gpointer data)
 
 	/* Force game over */
 	real_game.game_over = 1;
-	
+
 	/* Switch to undo state when able */
 	restart_loop = RESTART_UNDO;
 
@@ -7847,7 +7847,7 @@ static void debug_card_dialog(GtkMenuItem *menu_item, gpointer data)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(list_scroll),
 	                               GTK_POLICY_NEVER,
 	                               GTK_POLICY_ALWAYS);
-	
+
 	/* Add scrollable list view to dialog */
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), list_scroll);
 
@@ -8260,7 +8260,7 @@ int main(int argc, char *argv[])
 	GdkColor color;
 	int i;
 
-#ifdef __APPLE__        
+#ifdef __APPLE__
 	/* Set cwd to OS X .app bundle Resource fork so relative paths work */
 	CFBundleRef mainBundle = CFBundleGetMainBundle();
 	CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
@@ -8269,10 +8269,10 @@ int main(int argc, char *argv[])
 	{
 		// error! Resources (cards and ai nets) will not load.
 	}
-	CFRelease(resourcesURL);	
+	CFRelease(resourcesURL);
 	chdir(path);
 #endif
-	
+
 	/* Set random seed */
 	real_game.random_seed = time(NULL);
 
@@ -8420,13 +8420,13 @@ int main(int argc, char *argv[])
 	game_menu = gtk_menu_new();
 
 	/* Create game menu items */
-	new_item = gtk_menu_item_new_with_label("New"); 
-	load_item = gtk_menu_item_new_with_label("Load Game..."); 
-	save_item = gtk_menu_item_new_with_label("Save Game..."); 
+	new_item = gtk_menu_item_new_with_label("New");
+	load_item = gtk_menu_item_new_with_label("Load Game...");
+	save_item = gtk_menu_item_new_with_label("Save Game...");
 	undo_item = gtk_menu_item_new_with_label("Undo Turn");
 	select_item = gtk_menu_item_new_with_label("Select Parameters...");
 	option_item = gtk_menu_item_new_with_label("GUI Options...");
-	quit_item = gtk_menu_item_new_with_label("Quit"); 
+	quit_item = gtk_menu_item_new_with_label("Quit");
 
 	/* Add items to game menu */
 	gtk_menu_shell_append(GTK_MENU_SHELL(game_menu), new_item);
@@ -8661,7 +8661,7 @@ int main(int argc, char *argv[])
 
 	/* Request sizes for status areas */
 	status_resize();
-	
+
 	/* Create viewport for opponent boxes */
 	top_view = gtk_viewport_new(NULL, NULL);
 
@@ -9056,25 +9056,25 @@ int main(int argc, char *argv[])
 	switch_view(0, 0);
 
 #ifdef __APPLE__
-	/* Setup OS X style menus */	
-	IgeMacMenuGroup *group = ige_mac_menu_add_app_menu_group();
-	ige_mac_menu_add_app_menu_item(group,
+	/* Setup OS X style menus */
+	GtkMacMenuGroup *group = gtk_mac_menu_add_app_menu_group();
+	gtk_mac_menu_add_app_menu_item(group,
 	                               GTK_MENU_ITEM(about_item), NULL);
-	
-	group = ige_mac_menu_add_app_menu_group();
-	ige_mac_menu_add_app_menu_item(group,
+
+	group = gtk_mac_menu_add_app_menu_group();
+	gtk_mac_menu_add_app_menu_item(group,
 	                               GTK_MENU_ITEM(option_item),
 	                               "Preferences...");
-	
-	ige_mac_menu_set_quit_menu_item(GTK_MENU_ITEM(quit_item));
-	
+
+	gtk_mac_menu_set_quit_menu_item(GTK_MENU_ITEM(quit_item));
+
 	gtk_widget_hide(menu_bar);
-	ige_mac_menu_set_menu_bar(GTK_MENU_SHELL(menu_bar));	
+	gtk_mac_menu_set_menu_bar(GTK_MENU_SHELL(menu_bar));
 #endif
 
 	/* Reset GUI */
 	reset_gui();
-	
+
 	/* Modify GUI for current setup */
 	modify_gui();
 

@@ -1,6 +1,6 @@
 /*
  * Race for the Galaxy AI
- * 
+ *
  * Copyright (C) 2009-2011 Keldon Jones
  *
  * This program is free software; you can redistribute it and/or modify
@@ -236,7 +236,7 @@ void compute_net(net *learn)
 			learn->prev_input[i] = learn->input_value[i];
 		}
 	}
-	
+
 	/* Normalize hidden node results */
 	for (i = 0; i < learn->num_hidden; i++)
 	{

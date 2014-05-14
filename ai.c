@@ -1,6 +1,6 @@
 /*
  * Race for the Galaxy AI
- * 
+ *
  * Copyright (C) 2009-2011 Keldon Jones
  *
  * This program is free software; you can redistribute it and/or modify
@@ -1434,7 +1434,7 @@ static void perform_training(game *g, int who, double *desired)
 			target[i] = eval.win_prob[i];
 		}
 	}
-	
+
 	/* Loop over past input sets (starting with most recent) */
 	for (i = eval.num_past - 2; i >= 0; i--)
 	{
@@ -1614,7 +1614,7 @@ static int predict_action_player(game *g, int who, int n)
 		/* Set input if this much prestige */
 		role.input_value[n++] = p_ptr->prestige > i;
 	}
- 
+
 	/* Set inputs for previous turn actions */
 	for (i = 0; i < MAX_ACTION; i++)
 	{
@@ -2115,7 +2115,7 @@ static void ai_choose_action_advanced_aux(game *g, int who, int oa,
  * Choose actions in advanced game.
  *
  * Depending on the "one" parameter, we need to choose one or both actions:
- * 
+ *
  *  0 - choose both
  *  1 - choose first action
  *  2 - choose second action (and opponent's actions are known)
@@ -2380,7 +2380,7 @@ static void ai_choose_action_aux(game *g, int who, int current, double prob,
                                  double threshold)
 {
 	game sim;
-	int i; 
+	int i;
 	double score;
 #ifdef DEBUG
 	int old_computes, j;
@@ -3045,7 +3045,7 @@ static void ai_choose_discard_prestige(game *g, int who, int list[], int *num)
 		/* Done */
 		return;
 	}
-		
+
 	/* Loop over card choices */
 	for (i = 0; i < *num; i++)
 	{
@@ -3665,7 +3665,7 @@ static int ai_choose_place_opp(game *g, int who, int phase, int special)
 
 			/* Add a discard to make up for taken card */
 			sim.p[who].fake_discards++;
-			
+
 			/* Check for illegal world */
 			if (!settle_legal(&sim, who, unknown[j], 0, mil_only))
 				continue;
@@ -4218,7 +4218,7 @@ static void ai_choose_defend_aux2(game *g, int who, int which, int opponent,
 
 				/* Move card to opponent */
 				c_ptr->owner = opponent;
-				
+
 				/* Check for good on card */
 				if (c_ptr->covered != -1)
 				{
@@ -4290,7 +4290,7 @@ static void ai_choose_defend_aux2(game *g, int who, int which, int opponent,
 
 			/* Move card to opponent */
 			c_ptr->owner = opponent;
-			
+
 			/* Check for good on card */
 			if (c_ptr->covered != -1)
 			{
@@ -6688,7 +6688,7 @@ static void initial_training(game *g)
 			sim.p[i].vp = rand() % 50;
 			sim.p[i].end_vp = sim.p[i].vp;
 		}
-		
+
 		/* Clear best score */
 		most = -1;
 
